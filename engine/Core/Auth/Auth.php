@@ -16,7 +16,7 @@ class Auth implements AuthInteface
      * Status user authorized or not authorized
      * @var boolean
      */
-    public $authorized = false;
+    protected $authorized = false;
     /**
      * Object user
      * 
@@ -31,7 +31,7 @@ class Auth implements AuthInteface
      */
     public function authorized(): bool
     {
-        return $this->authorized();
+        return $this->authorized;
     }
     /**
      * Return user
@@ -48,8 +48,8 @@ class Auth implements AuthInteface
      */
     public function authorize($user) 
     {
-        Cookie::set('auth.authorized', true);
-        Cookie::set('auth.user', $user);
+        Cookie::set('auth_authorized', true);
+        Cookie::set('auth_user', $user);
         
         $this->authorized = true;
         $this->user = $user;
@@ -61,8 +61,8 @@ class Auth implements AuthInteface
      */
     public function unAuthorize($user): void
     {
-        Cookie::delete('auth.authorized');
-        Cookie::delete('auth.user');
+        Cookie::delete('auth_authorized');
+        Cookie::delete('auth_user');
         
         $this->authorized = false;
         $this->user = null;

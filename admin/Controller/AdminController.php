@@ -15,7 +15,9 @@ class AdminController extends Controller
      * @var object Auth
      */
     protected $auth;
+    
     /**
+     * Admin constructor
      * 
      * @param DI object $di
      */
@@ -25,7 +27,17 @@ class AdminController extends Controller
         
         $this->auth = new Auth();
         
-        if (!$this->auth->authorized && $this->request->server['REQUEST_URI'] !== '/admin/login') 
+        $this->checkAuthorization();
+    }
+    
+    /**
+     * Check authorized user
+     * 
+     * @return void
+     */
+    public function checkAuthorization() 
+    {
+        if (!$this->auth->authorized()) 
         {
             header('Location: /admin/login', true, 301);
             exit();
