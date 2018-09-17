@@ -22,7 +22,7 @@ class Auth implements AuthInteface
      * 
      * @var mixed
      */
-    protected $user;
+    protected $hashUser;
     
     /**
      * Get status user authorized or not authorized
@@ -37,9 +37,9 @@ class Auth implements AuthInteface
      * Return user
      * @return mixed
      */
-    public function user() 
+    public function hashUser() 
     {
-        return $this->user;
+        return Cookie::get('auth_user');
     }
     /**
      * Authorization user
@@ -52,7 +52,7 @@ class Auth implements AuthInteface
         Cookie::set('auth_user', $user);
         
         $this->authorized = true;
-        $this->user = $user;
+        $this->hashUser = $user;
     }
     /**
      * unAuthorize user

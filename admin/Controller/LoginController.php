@@ -28,6 +28,15 @@ class LoginController extends Controller
         parent::__construct($di);
 
         $this->auth = new Auth();
+        if($this->auth->hashUser() !== null)
+        {
+            $this->auth->authorize($this->auth->hashUser());
+        }
+        if($this->auth->authorized())
+        {
+            header('Location: /admin/', true, 301);
+            exit();
+        }
     }
 
     /**
