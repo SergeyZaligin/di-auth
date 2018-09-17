@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Сен 17 2018 г., 13:51
--- Версия сервера: 5.7.20
--- Версия PHP: 7.2.0
+-- Host: localhost
+-- Generation Time: Sep 17, 2018 at 05:00 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,46 +19,47 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `di`
+-- Database: `di`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
   `id` int(10) UNSIGNED NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(32) NOT NULL,
+  `hash` varchar(32) NOT NULL,
   `role` enum('admin','moderator','use','') NOT NULL,
   `date_reg` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `user`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `password`, `role`, `date_reg`) VALUES
-(1, 'admin@admin.com', 'e10adc3949ba59abbe56e057f20f883e', 'admin', '2018-09-17 13:50:34');
+INSERT INTO `user` (`id`, `email`, `password`, `hash`, `role`, `date_reg`) VALUES
+(1, 'admin@admin.com', 'e10adc3949ba59abbe56e057f20f883e', '', 'admin', '2018-09-17 13:50:34');
 
 --
--- Индексы сохранённых таблиц
+-- Indexes for dumped tables
 --
 
 --
--- Индексы таблицы `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT для таблицы `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;

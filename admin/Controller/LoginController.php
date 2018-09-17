@@ -44,11 +44,28 @@ class LoginController extends Controller
     {
         $params = $this->request->post;
 
-        $user = $this->db->query("SELECT * FROM user WHERE email=:email AND password=:password LIMIT 1", [
+        $query = $this->db->query("SELECT * FROM user WHERE email=:email AND password=:password LIMIT 1", [
               'email' => $params['email'],
               'password' => md5($params['password'])
         ]);
-
+        
+        if(!empty($query))
+        {
+            $user = $query[0];
+            if('admin' === $user['role'])
+            {
+                $hash = md5($user['id'] . $user['email'] . $user['password'] . $this->auth->salt());
+                
+                $this->db->query('UPDATE user SET hash=:hash WHERE id=:id', [
+                    'hash' => $hash,
+                    'id' => $user['id']
+                ]);
+                $this->auth->authorize($hash);
+                header('Location: /admin/login', true, 301);
+                exit();
+            }
+        }
+        
         //$this->auth->authorize('dddd');
 
         echo '<pre>';
