@@ -1,6 +1,7 @@
 <?php
 
 namespace Admin\Controller;
+use Admin\Model\UserRepository;
 
 /**
  * Description of DashboardController
