@@ -19,14 +19,14 @@ class Auth implements AuthInteface
     protected $authorized = false;
     /**
      * Object user
-     * 
+     *
      * @var mixed
      */
     protected $hashUser;
-    
+
     /**
      * Get status user authorized or not authorized
-     * 
+     *
      * @return bool
      */
     public function authorized(): bool
@@ -37,42 +37,36 @@ class Auth implements AuthInteface
      * Return user
      * @return mixed
      */
-    public function hashUser() 
+    public function hashUser()
     {
         return Cookie::get('auth_user');
     }
     /**
      * Authorization user
-     * 
+     *
      * @param $user
      */
-    public function authorize($user) 
+    public function authorize($user)
     {
         Cookie::set('auth_authorized', true);
         Cookie::set('auth_user', $user);
-        
-        $this->authorized = true;
-        $this->hashUser = $user;
     }
     /**
      * unAuthorize user
-     * 
-     * @param objject $user
+     *
+     * @param object $user
      */
-    public function unAuthorize($user): void
+    public function unAuthorize()
     {
         Cookie::delete('auth_authorized');
         Cookie::delete('auth_user');
-        
-        $this->authorized = false;
-        $this->user = null;
     }
     /**
      * Generate a new password salt
-     * 
+     *
      * @return int
      */
-    public static function salt() 
+    public static function salt()
     {
         return (string) rand(10000000, 99999999);
     }

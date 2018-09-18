@@ -14,7 +14,7 @@
 
     <!-- Custom styles for this template -->
     <link href="/admin/Assets/css/dashboard.css" rel="stylesheet">
-    
+
     <!-- simplelineicons for this template -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
 </head>
@@ -51,16 +51,16 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <div class="right-toolbar">
-                    <a href="#">
+                    <a href="/admin/logout/">
                         <i class="icon-logout icons"></i> Logout
                     </a>
                 </div>
             </div>
         </nav>
     </header>
-    
+
     <main>
         <div class="container">
             <br><br><br>

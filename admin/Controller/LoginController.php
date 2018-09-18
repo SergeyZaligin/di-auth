@@ -28,13 +28,10 @@ class LoginController extends Controller
         parent::__construct($di);
 
         $this->auth = new Auth();
+
         if($this->auth->hashUser() !== null)
         {
-            $this->auth->authorize($this->auth->hashUser());
-        }
-        if($this->auth->authorized())
-        {
-            header('Location: /admin/', true, 301);
+            header('Location: /admin/');
             exit();
         }
     }
@@ -57,28 +54,22 @@ class LoginController extends Controller
               'email' => $params['email'],
               'password' => md5($params['password'])
         ]);
-        
+
         if(!empty($query))
         {
             $user = $query[0];
             if('admin' === $user['role'])
             {
                 $hash = md5($user['id'] . $user['email'] . $user['password'] . $this->auth->salt());
-                
+
                 $this->db->query('UPDATE user SET hash=:hash WHERE id=:id', [
                     'hash' => $hash,
                     'id' => $user['id']
                 ]);
                 $this->auth->authorize($hash);
-                header('Location: /admin/login', true, 301);
+                header('Location: /admin/login');
                 exit();
             }
         }
-        
-        //$this->auth->authorize('dddd');
-
-        echo '<pre>';
-        print_r($user);
-        echo '</pre>';
     }
 }
