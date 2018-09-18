@@ -1,6 +1,6 @@
 <?php
 
-namespace Admin\Model;
+namespace Admin\Model\User;
     
 /**
  * Description of name
